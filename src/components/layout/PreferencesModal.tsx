@@ -1,6 +1,6 @@
 import {useContext, useState} from "react";
 import {PreferenceProps, Preferences} from "../ctx/Preferences";
-import {Button, Form, FormField, Input, Modal, SpaceBetween} from "@cloudscape-design/components";
+import {Button, Flashbar, Form, FormField, Input, Modal, SpaceBetween} from "@cloudscape-design/components";
 
 export interface PreferencesModalProps {
     readonly visible: boolean;
@@ -34,11 +34,19 @@ export const PreferencesModal = ({visible, onClose, mergePreferences}: Preferenc
         <Button variant={"primary"} onClick={save}>Save</Button>
     </SpaceBetween>;
     return (<Modal visible={visible} onDismiss={onDismiss} header={'Preferences'}>
-        <form onSubmit={e => e.preventDefault()}>
-            <Form actions={actions}>
-                {addInputForPref('userId', 'User ID')}
-                {addInputForPref('apiToken', 'API Token')}
-            </Form>
-        </form>
+        <SpaceBetween size={"s"} direction={"vertical"}>
+            <Flashbar items={[{
+                id: "localStorageUse",
+                type: "warning",
+                dismissible: false,
+                content: "This will save credentials in the browser's local storage for convenience. Use at your own risk"
+            }]}/>
+            <form onSubmit={e => e.preventDefault()}>
+                <Form actions={actions}>
+                    {addInputForPref('userId', 'User ID')}
+                    {addInputForPref('apiToken', 'API Token')}
+                </Form>
+            </form>
+        </SpaceBetween>
     </Modal>)
 }

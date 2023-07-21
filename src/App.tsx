@@ -6,12 +6,22 @@ import {PreferenceProps, Preferences} from "./components/ctx/Preferences";
 import {PreferencesModal} from "./components/layout/PreferencesModal";
 import {TopNav} from "./components/layout/TopNav";
 
+const userIdKey = "habitica-userId";
+const apiTokenKey = "habitica-apiToken";
+
+const initialProps: PreferenceProps = {
+    userId: localStorage.getItem(userIdKey) || undefined,
+    apiToken: localStorage.getItem(apiTokenKey) || undefined,
+}
+
 const App = () => {
     const [showPreferences, setShowPreferences] = useState(false);
-    const [preferences, setPreferences] = useState<PreferenceProps>({});
+    const [preferences, setPreferences] = useState<PreferenceProps>(initialProps);
 
     const mergePreferences = (pref: Partial<PreferenceProps>) => {
-        setPreferences(prev => Object.assign(prev, pref))
+        setPreferences(prev => Object.assign(prev, pref));
+        pref.userId && localStorage.setItem(userIdKey, pref.userId);
+        pref.apiToken && localStorage.setItem(apiTokenKey, pref.apiToken);
     }
 
     const content = <ContentLayout disableOverlap={true}>
