@@ -5,6 +5,7 @@ import {AppLayout, ContentLayout} from "@cloudscape-design/components";
 import {PreferenceProps, Preferences} from "./components/ctx/Preferences";
 import {PreferencesModal} from "./components/layout/PreferencesModal";
 import {TopNav} from "./components/layout/TopNav";
+import {TaskHistory} from "./components/TaskHistory";
 
 const userIdKey = "habitica-userId";
 const apiTokenKey = "habitica-apiToken";
@@ -25,7 +26,7 @@ const App = () => {
     }
 
     const content = <ContentLayout disableOverlap={true}>
-        <pre>{JSON.stringify(preferences, null, 2)}</pre>
+        <TaskHistory/>
     </ContentLayout>;
 
     return <Preferences.Provider value={preferences}>
