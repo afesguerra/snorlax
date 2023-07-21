@@ -1,7 +1,8 @@
 import {createContext} from "react";
 
 export interface PreferenceProps {
-    apiKey?: string
+    userId?: string;
+    apiToken?: string;
 }
 
 export const Preferences = createContext<PreferenceProps>({});

@@ -36,7 +36,8 @@ export const PreferencesModal = ({visible, onClose, mergePreferences}: Preferenc
     return (<Modal visible={visible} onDismiss={onDismiss} header={'Preferences'}>
         <form onSubmit={e => e.preventDefault()}>
             <Form actions={actions}>
-                {addInputForPref('apiKey', 'API Key')}
+                {addInputForPref('userId', 'User ID')}
+                {addInputForPref('apiToken', 'API Token')}
             </Form>
         </form>
     </Modal>)
