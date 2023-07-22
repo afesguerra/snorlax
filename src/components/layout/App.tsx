@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import './App.css';
 import "@cloudscape-design/global-styles/index.css"
 import {AppLayout, ContentLayout} from "@cloudscape-design/components";
-import {PreferenceProps, Preferences} from "./components/ctx/Preferences";
-import {PreferencesModal} from "./components/layout/PreferencesModal";
-import {TopNav} from "./components/layout/TopNav";
-import {TaskHistory} from "./components/TaskHistory";
+import {PreferenceProps, Preferences} from "../ctx/Preferences";
+import {PreferencesModal} from "./PreferencesModal";
+import {TopNav} from "./TopNav";
+import {TaskHistory} from "../TaskHistory";
 
 const userIdKey = "habitica-userId";
 const apiTokenKey = "habitica-apiToken";
