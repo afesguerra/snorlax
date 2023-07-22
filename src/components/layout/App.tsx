@@ -5,6 +5,9 @@ import {PreferenceProps, PreferencesModal} from "./PreferencesModal";
 import {TopNav} from "./TopNav";
 import {TaskHistory} from "../TaskHistory";
 import {API, HabiticaAPI} from "../../api/HabiticaAPI";
+import { I18nProvider } from '@cloudscape-design/components/i18n';
+import messages from '@cloudscape-design/components/i18n/messages/all.all';
+
 
 const userIdKey = "habitica-userId";
 const apiTokenKey = "habitica-apiToken";
@@ -35,7 +38,7 @@ const App = () => {
         </ContentLayout>
     </API.Provider> : <Header>Must provide credentials</Header>;
 
-    return <>
+    return <I18nProvider messages={[messages]}>
         <PreferencesModal
             visible={showPreferences}
             onClose={() => setShowPreferences(false)}
@@ -48,7 +51,7 @@ const App = () => {
             toolsHide={true}
             navigationHide={true}
         />
-    </>
+    </I18nProvider>
 };
 
 export default App;
