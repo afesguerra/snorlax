@@ -1,4 +1,5 @@
 import axios, {AxiosRequestConfig} from "axios";
+import {createContext} from "react";
 
 export type DaysOfWeek = "m" | "t" | "w" | "th" | "f" | "s" | "su";
 
@@ -63,3 +64,8 @@ export class HabiticaAPI {
         return data.data;
     }
 }
+
+export const API = createContext<HabiticaAPI>(new HabiticaAPI({
+    apiToken: "",
+    userId: ""
+}));

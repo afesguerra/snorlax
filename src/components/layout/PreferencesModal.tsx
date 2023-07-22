@@ -1,19 +1,23 @@
-import {useContext, useState} from "react";
-import {PreferenceProps, Preferences} from "../ctx/Preferences";
+import {useState} from "react";
 import {Button, Flashbar, Form, FormField, Input, Modal, SpaceBetween} from "@cloudscape-design/components";
+
+export interface PreferenceProps {
+    userId?: string;
+    apiToken?: string;
+}
 
 export interface PreferencesModalProps {
     readonly visible: boolean;
     readonly onClose: () => void;
-    readonly mergePreferences: (p: Partial<PreferenceProps>) => void;
+    readonly pref: PreferenceProps;
+    readonly accept: (p: PreferenceProps) => void;
 }
 
-export const PreferencesModal = ({visible, onClose, mergePreferences}: PreferencesModalProps) => {
-    const pref = useContext(Preferences);
-    const [localPref, setLocalPref] = useState<Partial<PreferenceProps>>(pref);
+export const PreferencesModal = ({visible, onClose, pref, accept}: PreferencesModalProps) => {
+    const [localPref, setLocalPref] = useState<PreferenceProps>(pref);
 
     const save = () => {
-        mergePreferences(localPref);
+        accept(localPref);
         onClose();
     }
 
@@ -26,7 +30,7 @@ export const PreferencesModal = ({visible, onClose, mergePreferences}: Preferenc
             <Input value={localPref[key] || ""}
                    inputMode={"text"}
                    type={"text"}
-                   onChange={({detail}) => setLocalPref(p => ({...p, [key]: detail.value}))}
+                   onChange={({detail}) => setLocalPref(p => ({...p, [key]: detail.value || undefined}))}
             />
         </FormField>;
 

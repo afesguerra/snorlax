@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import "@cloudscape-design/global-styles/index.css"
-import {AppLayout, ContentLayout} from "@cloudscape-design/components";
-import {PreferenceProps, Preferences} from "../ctx/Preferences";
-import {PreferencesModal} from "./PreferencesModal";
+import {AppLayout, ContentLayout, Header} from "@cloudscape-design/components";
+import {PreferenceProps, PreferencesModal} from "./PreferencesModal";
 import {TopNav} from "./TopNav";
 import {TaskHistory} from "../TaskHistory";
+import {API, HabiticaAPI} from "../../api/HabiticaAPI";
 
 const userIdKey = "habitica-userId";
 const apiTokenKey = "habitica-apiToken";
@@ -18,21 +18,29 @@ const App = () => {
     const [showPreferences, setShowPreferences] = useState(false);
     const [preferences, setPreferences] = useState<PreferenceProps>(initialProps);
 
-    const mergePreferences = (pref: Partial<PreferenceProps>) => {
-        setPreferences(prev => Object.assign(prev, pref));
+    const savePreferences = (pref: PreferenceProps) => {
+        setPreferences(pref);
         pref.userId && localStorage.setItem(userIdKey, pref.userId);
         pref.apiToken && localStorage.setItem(apiTokenKey, pref.apiToken);
     }
 
-    const content = <ContentLayout disableOverlap={true}>
-        <TaskHistory/>
-    </ContentLayout>;
+    const api = (preferences.userId && preferences.apiToken && new HabiticaAPI({
+        userId: preferences.userId,
+        apiToken: preferences.apiToken,
+    })) || undefined;
 
-    return <Preferences.Provider value={preferences}>
+    const content = api ? <API.Provider value={api}>
+        <ContentLayout disableOverlap={true}>
+            <TaskHistory/>
+        </ContentLayout>
+    </API.Provider> : <Header>Must provide credentials</Header>;
+
+    return <>
         <PreferencesModal
             visible={showPreferences}
             onClose={() => setShowPreferences(false)}
-            mergePreferences={mergePreferences}/>
+            pref={preferences}
+            accept={savePreferences}/>
         <TopNav showPreferences={() => setShowPreferences(true)}/>
         <AppLayout
             content={content}
@@ -40,7 +48,7 @@ const App = () => {
             toolsHide={true}
             navigationHide={true}
         />
-    </Preferences.Provider>
+    </>
 };
 
 export default App;

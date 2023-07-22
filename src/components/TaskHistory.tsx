@@ -1,26 +1,16 @@
 import {useContext, useEffect, useState} from "react";
-import {Preferences} from "./ctx/Preferences";
-import {Header, Spinner} from "@cloudscape-design/components";
-import {HabiticaAPI, Task} from "../api/HabiticaAPI";
-
-async function getTasks(userId: string, apiToken: string) {
-    const api = new HabiticaAPI({userId, apiToken});
-    return await api.getTasks();
-}
+import {Spinner} from "@cloudscape-design/components";
+import {API, Task} from "../api/HabiticaAPI";
 
 export const TaskHistory = () => {
-    const {apiToken, userId} = useContext(Preferences);
     const [tasks, setTasks] = useState<Task[]>();
+    const api = useContext(API);
 
     useEffect(() => {
-        if (tasks === undefined && userId && apiToken) {
-            getTasks(userId, apiToken).then(setTasks);
+        if (tasks === undefined) {
+            api?.getTasks().then(setTasks);
         }
-    }, [tasks, userId, apiToken]);
-
-    if (!(userId && apiToken)) {
-        return <Header>Must provide credentials</Header>
-    }
+    }, [tasks, api]);
 
     if (tasks === undefined) {
         return <Spinner/>;
