@@ -7,7 +7,7 @@ export interface Reminder {
 
 }
 
-export interface Task {
+interface BaseTask {
     readonly _id: string;
     readonly alias?: string;
     readonly attribute: string;
@@ -33,6 +33,23 @@ export interface Task {
     readonly userId: string;
     readonly value: number;
 }
+
+interface History {
+    readonly date: number;
+    readonly value: number;
+}
+
+export interface HabitHistory extends History {
+    readonly scoredUp: number;
+    readonly scoredDown: number;
+}
+
+export interface Habit extends BaseTask {
+    readonly type: "habit";
+    readonly history: HabitHistory[];
+}
+
+export type Task = Habit;
 
 interface GetTasksResponse {
     readonly success: boolean;
