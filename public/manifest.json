@@ -5,6 +5,10 @@
     {
       "src": "snorlaxhead.svg",
       "sizes": "any"
+    },
+    {
+      "src": "snorlaxhead-inverse.svg",
+      "sizes": "any"
     }
   ],
   "start_url": ".",
