@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import "@cloudscape-design/global-styles/index.css"
-import {AppLayout, ContentLayout, Header} from "@cloudscape-design/components";
+import {AppLayout, ContentLayout} from "@cloudscape-design/components";
 import {PreferenceProps, PreferencesModal} from "./PreferencesModal";
 import {TopNav} from "./TopNav";
 import {TaskHistory} from "../TaskHistory";
 import {API, HabiticaAPI} from "../../api/HabiticaAPI";
-import { I18nProvider } from '@cloudscape-design/components/i18n';
+import {I18nProvider} from '@cloudscape-design/components/i18n';
 import messages from '@cloudscape-design/components/i18n/messages/all.all';
+import {Welcome} from "./Welcome";
 
 
 const userIdKey = "habitica-userId";
@@ -36,7 +37,7 @@ const App = () => {
         <ContentLayout disableOverlap={true}>
             <TaskHistory/>
         </ContentLayout>
-    </API.Provider> : <Header>Must provide credentials</Header>;
+    </API.Provider> : <Welcome/>
 
     return <I18nProvider messages={[messages]}>
         <PreferencesModal
