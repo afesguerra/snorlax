@@ -85,7 +85,7 @@ export const Welcome = () => (
                             You can get these credentials in <Link
                                 external={true}
                                 href={'https://habitica.com/user/settings/api'}>
-                                Habitca's API settings
+                                Habitica's API settings
                             </Link>
                         </p>
                     </TextContent>
