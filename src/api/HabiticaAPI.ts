@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig} from "axios";
+import axios, {AxiosInstance} from "axios";
 import {createContext} from "react";
 
 export type DaysOfWeek = "m" | "t" | "w" | "th" | "f" | "s" | "su";
@@ -63,21 +63,21 @@ export interface HabiticaAPIProps {
 }
 
 export class HabiticaAPI {
-    private readonly defaultConfig: AxiosRequestConfig;
+    private readonly client: AxiosInstance;
 
     constructor({userId, apiToken}: HabiticaAPIProps) {
-        this.defaultConfig = {
+        this.client = axios.create({
             baseURL: 'https://habitica.com/api/v3',
             headers: {
                 'x-client': '84dd3cb4-ad47-48da-b195-9b18df60265c-Snorlax',
                 'x-api-user': userId,
                 'x-api-key': apiToken,
             }
-        }
+        });
     }
 
     async getTasks(): Promise<Task[]> {
-        const {data} = await axios.get<GetTasksResponse>(`/tasks/user`, this.defaultConfig);
+        const {data} = await this.client.get<GetTasksResponse>(`/tasks/user`);
         return data.data;
     }
 }
