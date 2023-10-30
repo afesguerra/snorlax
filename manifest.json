@@ -1,0 +1,18 @@
+{
+  "short_name": "Snorlax",
+  "name": "Snorlax",
+  "icons": [
+    {
+      "src": "snorlaxhead.svg",
+      "sizes": "any"
+    },
+    {
+      "src": "snorlaxhead-inverse.svg",
+      "sizes": "any"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#00000000"
+}

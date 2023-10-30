@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/snorlax/static/css/main.04f41a54.css",
+    "main.js": "/snorlax/static/js/main.57e550d1.js",
+    "static/js/787.5c51614d.chunk.js": "/snorlax/static/js/787.5c51614d.chunk.js",
+    "static/media/snorlaxhead.svg": "/snorlax/static/media/snorlaxhead.4dd88f8b591d388930013609f931d851.svg",
+    "static/media/github.svg": "/snorlax/static/media/github.210e6a5553163b8b9cb1568f3e785073.svg",
+    "index.html": "/snorlax/index.html",
+    "main.04f41a54.css.map": "/snorlax/static/css/main.04f41a54.css.map",
+    "main.57e550d1.js.map": "/snorlax/static/js/main.57e550d1.js.map",
+    "787.5c51614d.chunk.js.map": "/snorlax/static/js/787.5c51614d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04f41a54.css",
+    "static/js/main.57e550d1.js"
+  ]
+}
